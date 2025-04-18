@@ -50,3 +50,30 @@ int main() {
     int size = strlen(array);
     cout << check_par(array, size);
 }
+
+
+//second code
+// #include <iostream>
+// #include<stack>
+// #include<cstring>
+// using namespace std;
+// bool check_par(const char* str);
+// int main() {
+//     const char* str="3+2(2-3(5+7))";
+//     cout<<check_par(str)<<endl;
+//     return 0;
+
+// }
+// bool check_par(const char* str){
+//     stack<char> stk;
+//     for(int i=0;str[i]!='\0';i++){
+//         if(str[i]=='('){
+//             stk.push(str[i]);
+//         }
+//         else if(str[i]==')'){
+//             if(stk.empty())return false;
+//             stk.pop();
+//         }
+//     }
+//     return stk.empty();
+// };
