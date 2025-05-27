@@ -53,17 +53,34 @@ int sum_node(node* root){
 
     return(root->data)+sum_node(root->left)+sum_node(root->right);
 }
+int dia_t(node* tree){
+    if (tree==NULL)
+    {
+        return 0;
+    }
+    int ht=height(tree->left);
+    int hr=height(tree->right);
+    int dia=hr+ht;
+    int maxdia=max(dia_t(tree->left),dia_t(tree->right));
+    return max(dia,maxdia);
+}
 int main(){
-vector <int> preord = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+vector <int> rt={11,13,19,-1,-1,26,21,-1,-1,22,-1,-1,15,17,-1,-1,23,-1,25,-1,-1};
+vector <int> preord = {1, 2, 4, -1, -1, 5, -1,  -1, 3, -1, 6, -1, -1};
 node* root=build_tree(preord);
+ind=-1;
+node* root2=build_tree(rt);
 /* cout<<" "<<root->data<<endl;
 cout<<root->left->data<<" "<<root->right->data; */
 print_tree(root);
 int ans=0;
-cout<<"total number of elements: "<<nt(root)<<endl;
+cout<<"\n total number of elements: "<<nt(root)<<endl;
 
 cout<<"height is: "<<height(root)<<endl;
 int sum=sum_node(root);
 cout<<"the sum of node is: "<<sum<<endl;
+cout<<"the diameter is: "<<dia_t(root)<<endl;
+print_tree(root2);
+cout<<"\nsecond binary tree has diameter of: "<<dia_t(root2);
 return 0;
 }
