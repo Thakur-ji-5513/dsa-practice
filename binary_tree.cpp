@@ -69,23 +69,38 @@ bool id_tree(node* tree1, node* tree2){
     {
         return true;
     }
+
     if ((tree1==NULL && tree2!=NULL) ||(tree2==NULL && tree1!=NULL) )
     {
         return false;
     }
-    
-    
+
     if (tree1->data!=tree2->data)
     {
         return false;
     }
-    if(id_tree(tree1->right,tree2->right)!=true){
+    if(!id_tree(tree1->right,tree2->right)){
         return false;
     }
-    if(id_tree(tree1->left,tree2->left)!=true){
+    if(!id_tree(tree1->left,tree2->left)){
         return false;
     }
     return true;
+}
+void k_val(node* tree, int k){
+    if (tree==NULL)
+    {
+        return;
+    }
+    
+    if (k==1)
+    {
+        cout<<tree->data<<" ";
+        return;
+    }
+    k_val(tree->left,k-1);
+    k_val(tree->right,k-1);
+    return;
 }
 int main(){
 vector <int> rt={11,13,19,-1,-1,26,21,-1,-1,22,-1,-1,15,17,-1,-1,23,-1,25,-1,-1};
@@ -106,5 +121,6 @@ cout<<"the diameter is: "<<dia_t(root)<<endl;
 print_tree(root2);
 cout<<"\nsecond binary tree has diameter of: "<<dia_t(root2)<<endl;
 cout<<id_tree(root,root2)<<endl;
+k_val(root,3);
 return 0;
 }
