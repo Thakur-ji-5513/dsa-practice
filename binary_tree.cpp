@@ -64,6 +64,29 @@ int dia_t(node* tree){
     int maxdia=max(dia_t(tree->left),dia_t(tree->right));
     return max(dia,maxdia);
 }
+bool id_tree(node* tree1, node* tree2){
+    if (tree1==NULL && tree2==NULL)
+    {
+        return true;
+    }
+    if ((tree1==NULL && tree2!=NULL) ||(tree2==NULL && tree1!=NULL) )
+    {
+        return false;
+    }
+    
+    
+    if (tree1->data!=tree2->data)
+    {
+        return false;
+    }
+    if(id_tree(tree1->right,tree2->right)!=true){
+        return false;
+    }
+    if(id_tree(tree1->left,tree2->left)!=true){
+        return false;
+    }
+    return true;
+}
 int main(){
 vector <int> rt={11,13,19,-1,-1,26,21,-1,-1,22,-1,-1,15,17,-1,-1,23,-1,25,-1,-1};
 vector <int> preord = {1, 2, 4, -1, -1, 5, -1,  -1, 3, -1, 6, -1, -1};
@@ -81,6 +104,7 @@ int sum=sum_node(root);
 cout<<"the sum of node is: "<<sum<<endl;
 cout<<"the diameter is: "<<dia_t(root)<<endl;
 print_tree(root2);
-cout<<"\nsecond binary tree has diameter of: "<<dia_t(root2);
+cout<<"\nsecond binary tree has diameter of: "<<dia_t(root2)<<endl;
+cout<<id_tree(root,root2)<<endl;
 return 0;
 }
