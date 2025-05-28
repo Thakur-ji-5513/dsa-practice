@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 
 class node{
@@ -102,6 +103,86 @@ void k_val(node* tree, int k){
     k_val(tree->right,k-1);
     return;
 }
+void level_ord(node* tree){
+    if (tree==NULL)
+    {
+        cout<<"tree is empty :)";
+    }
+    queue <node*>elem;
+    elem.push(tree);
+    elem.push(NULL);
+    while (!elem.empty())
+    {
+        node* current=elem.front();
+        elem.pop();
+        if (current!=NULL)
+        {
+            cout<<current->data<<" ";
+            if (current->left)
+            {
+                elem.push(current->left);
+            }
+            if (current->right)     
+            {
+                elem.push(current->right);
+            }
+            else if (!elem.empty())
+            {
+                elem.push(NULL);
+            }
+            
+            
+        }
+        
+    }
+    return;
+    
+    
+}
+
+int k_sum(node* tree,int k){
+    if (tree==NULL)
+    {
+        return 0;
+    }
+    int trav=1;
+    int sum=0;
+    queue <node*>elem;
+    elem.push(tree);
+    elem.push(NULL);
+    while (!elem.empty())
+    {
+        node* current=elem.front();
+        elem.pop();
+        if (current==NULL)
+        {
+            trav++;
+            if (!elem.empty())
+            {
+                elem.push(NULL);
+            } 
+        }
+        
+        if (current!=NULL)
+        {
+            if (trav==k)
+            {
+                sum=sum+current->data;
+            }
+            if (current->left)
+            {
+                elem.push(current->left);
+            }
+            if (current->right)     
+            {
+                elem.push(current->right);
+            }
+        }
+        
+        
+    }
+    return sum;
+}
 int main(){
 vector <int> rt={11,13,19,-1,-1,26,21,-1,-1,22,-1,-1,15,17,-1,-1,23,-1,25,-1,-1};
 vector <int> preord = {1, 2, 4, -1, -1, 5, -1,  -1, 3, -1, 6, -1, -1};
@@ -122,5 +203,8 @@ print_tree(root2);
 cout<<"\nsecond binary tree has diameter of: "<<dia_t(root2)<<endl;
 cout<<id_tree(root,root2)<<endl;
 k_val(root,3);
+level_ord(root2);
+cout<<endl;
+cout<<k_sum(root,2)<<endl;
 return 0;
 }
